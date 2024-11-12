@@ -5,7 +5,7 @@ import '../../services/firestore.dart';
 import '../workouts/workouts_model.dart';
 
 class SavedworkoutsViewModel extends ChangeNotifier {
-  List<workout> workouts = [];
+  List<Workout> workouts = [];
 
   final workoutPath = '/workouts';
   final firestore = FirebaseFirestore.instance;
@@ -14,17 +14,17 @@ class SavedworkoutsViewModel extends ChangeNotifier {
     firestore.collection(workoutPath).snapshots().listen((querySnapshot) {
       workouts = querySnapshot.docs.map((doc) {
         final data = doc.data();
-        return workout.fromFirestore(data);
+        return Workout.fromFirestore(data);
       }).toList();
       notifyListeners();
     });
   }
 
-  void deleteworkout(workout workout) {
+  void deleteworkout(Workout workout) {
     FirestoreService.deleteworkout(workout);
   }
 
-  void updateworkout(workout workout) {
+  void updateworkout(Workout workout) {
     FirestoreService.updateworkout(workout);
     notifyListeners();
   }

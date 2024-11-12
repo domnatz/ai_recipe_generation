@@ -7,7 +7,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../services/firestore.dart';
 import '../../util/filter_chip_enums.dart';
-import '../workouts/workout_model.dart';
+import '../workouts/workouts_model.dart';
 import 'prompt_model.dart';
 
 class PromptViewModel extends ChangeNotifier {
@@ -26,7 +26,7 @@ class PromptViewModel extends ChangeNotifier {
   String badImageFailure =
       "The workout request either does not contain images, or does not contain images of food items. I cannot recommend a workout.";
 
-  workout? workout;
+  Workout? workout;
   String? _geminiFailureResponse;
   String? get geminiFailureResponse => _geminiFailureResponse;
   set geminiFailureResponse(String? value) {
@@ -43,7 +43,8 @@ class PromptViewModel extends ChangeNotifier {
 
   void addAdditionalPromptContext(String text) {
     final existingInputs = userPrompt.additionalTextInputs;
-    userPrompt = userPrompt.copyWith(additionalTextInputs: [...existingInputs, text]);
+    userPrompt =
+        userPrompt.copyWith(additionalTextInputs: [...existingInputs, text]);
     notifyListeners();
   }
 
@@ -139,9 +140,9 @@ Return the workout plan as valid JSON using the following structure:
   "safetyPrecautions": \$safetyPrecautions,
   "benefits": \$benefits,
 }
-  
-uniqueId should be unique and of type String. 
-title, description, muscleGroups, safetyPrecautions, and benefits should be of String type. 
+
+uniqueId should be unique and of type String.
+title, description, muscleGroups, safetyPrecautions, and benefits should be of String type.
 equipment and instructions should be of type List<String>.
 ''';
 }
