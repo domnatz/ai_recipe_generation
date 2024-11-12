@@ -31,10 +31,10 @@ class GeminiService {
     return await model.generateContent(
       input,
       generationConfig: GenerationConfig(
-        temperature: 0.4,
+        temperature: 0,
         topK: 32,
         topP: 1,
-        maxOutputTokens: 4096,
+        maxOutputTokens: 8192,
       ),
       safetySettings: [
         SafetySetting(HarmCategory.harassment, HarmBlockThreshold.high),

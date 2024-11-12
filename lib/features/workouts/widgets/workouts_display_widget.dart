@@ -93,34 +93,6 @@ class workoutDisplayWidget extends StatelessWidget {
     return widgets;
   }
 
-  List<Widget> _buildSafetyPrecautions(List<String> safetyPrecautions) {
-    final widgets = <Widget>[];
-    for (var precaution in safetyPrecautions) {
-      widgets.add(
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(
-              Symbols.warning,
-              size: 12,
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            Expanded(
-              child: Text(
-                precaution,
-                softWrap: true,
-              ),
-            ),
-          ],
-        ),
-      );
-    }
-
-    return widgets;
-  }
-
   List<Widget> _buildBenefits(List<String> benefits) {
     final widgets = <Widget>[];
     for (var benefit in benefits) {
@@ -271,18 +243,6 @@ class workoutDisplayWidget extends StatelessWidget {
                       style: MarketplaceTheme.subheading1),
                 ),
                 ..._buildMuscleGroups(workout.muscleGroups),
-                const Divider(
-                  height: 40,
-                  color: Colors.black26,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: MarketplaceTheme.spacing7,
-                  ),
-                  child: Text('Safety Precautions:',
-                      style: MarketplaceTheme.subheading1),
-                ),
-                ..._buildSafetyPrecautions(workout.safetyPrecautions),
                 const Divider(
                   height: 40,
                   color: Colors.black26,

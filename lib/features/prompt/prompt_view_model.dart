@@ -117,18 +117,17 @@ class PromptViewModel extends ChangeNotifier {
 
   String get mainPrompt {
     return '''
-You are a professional gym trainer. You have a client who is looking to get in shape for a trip to the Amazon Rainforest. They have the following gym equipment: ${userPrompt.equipment}.
+You are a professional gym trainer. You have a client who is looking to get in shape.
+They have the following gym equipment: ${userPrompt.equipment}.
 Recommend me workouts based on the captured gym equipment.
 The workout should be realistic and doable to the average user.
 If there are no images attached, or if the image does not contain gym equipment, respond exactly with: $badImageFailure
 
 Adhere to safety and handling best practices when using gym equipment.
 These are my target muscle groups: ${userPrompt.selectedmuscleGroup},
-Optionally also include the following equipment: ${userPrompt.equipment}
 Do not repeat any equipment.
 
-After providing the workouts, add descriptions that creatively explain why the workouts are good based on only the equipment used in the workout.
-List out any safety precautions when using the gym equipment.
+After providing the workouts, add a short description that explains why the workouts are good based on only the equipment used in the workout.
 Provide a summary of the workout and the benefits of the workout. Make your responses as brief as possible.
 
 ${promptTextController.text.isNotEmpty ? promptTextController.text : ''}
@@ -144,12 +143,11 @@ Return the workout plan as valid JSON using the following structure:
   "description": \$description,
   "instructions": \$instructions,
   "muscleGroups": \$muscleGroups,
-  "safetyPrecautions": \$safetyPrecautions,
   "benefits": \$benefits,
 }
 
 uniqueId should be unique and of type String.
-title, description, muscleGroups, safetyPrecautions, and benefits should be of String type.
+title, description, muscleGroups, and benefits should be of String type.
 equipment and instructions should be of type List<String>.
 ''';
 }

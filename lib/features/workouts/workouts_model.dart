@@ -11,7 +11,6 @@ class Workout {
     required this.equipment,
     required this.instructions,
     required this.muscleGroups,
-    required this.safetyPrecautions,
     required this.benefits,
     this.rating = -1,
   });
@@ -22,7 +21,6 @@ class Workout {
   final List<String> equipment;
   final List<String> instructions;
   final List<String> muscleGroups;
-  final List<String> safetyPrecautions;
   final List<String> benefits;
   int rating;
 
@@ -42,7 +40,6 @@ class Workout {
           "id": String id,
           "muscleGroups": List<dynamic> muscleGroups,
           "description": String description,
-          "safetyPrecautions": List<dynamic> safetyPrecautions,
           "benefits": List<dynamic> benefits,
         }) {
       return Workout(
@@ -51,8 +48,6 @@ class Workout {
           equipment: equipment.map((i) => i.toString()).toList(),
           instructions: instructions.map((i) => i.toString()).toList(),
           muscleGroups: muscleGroups.map((i) => i.toString()).toList(),
-          safetyPrecautions:
-              safetyPrecautions.map((i) => i.toString()).toList(),
           benefits: benefits.map((i) => i.toString()).toList(),
           description: description);
     }
@@ -69,7 +64,6 @@ class Workout {
       'equipment': equipment,
       'muscleGroups': muscleGroups,
       'rating': rating,
-      'safetyPrecautions': safetyPrecautions,
       'benefits': benefits,
       'description': description,
     };
@@ -84,7 +78,6 @@ class Workout {
           "id": String id,
           "muscleGroups": List<dynamic> muscleGroups,
           "description": String description,
-          "safetyPrecautions": List<dynamic> safetyPrecautions,
           "benefits": List<dynamic> benefits,
           "rating": int rating
         }) {
@@ -94,7 +87,6 @@ class Workout {
         equipment: equipment.map((i) => i.toString()).toList(),
         instructions: instructions.map((i) => i.toString()).toList(),
         muscleGroups: muscleGroups.map((i) => i.toString()).toList(),
-        safetyPrecautions: safetyPrecautions.map((i) => i.toString()).toList(),
         benefits: benefits.map((i) => i.toString()).toList(),
         description: description,
         rating: rating,
