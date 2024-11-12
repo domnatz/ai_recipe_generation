@@ -84,7 +84,7 @@ class PromptViewModel extends ChangeNotifier {
       if (content.text != null && content.text!.contains(badImageFailure)) {
         geminiFailureResponse = badImageFailure;
       } else {
-        workout = workout.fromGeneratedContent(content);
+        workout = Workout.fromGeneratedContent(content);
       }
     } catch (error) {
       geminiFailureResponse = 'Failed to reach Gemini. \n\n$error';

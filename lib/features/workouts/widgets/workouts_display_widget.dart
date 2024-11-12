@@ -170,7 +170,7 @@ class workoutDisplayWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            workout!.title,
+                            workout.title,
                             softWrap: true,
                             style: MarketplaceTheme.heading2,
                           ),
@@ -221,7 +221,7 @@ class workoutDisplayWidget extends StatelessWidget {
                               content: Padding(
                                 padding: const EdgeInsets.all(
                                     MarketplaceTheme.spacing7),
-                                child: Text(workout!.description),
+                                child: Text(workout.description),
                               ),
                             );
                           },
@@ -270,7 +270,7 @@ class workoutDisplayWidget extends StatelessWidget {
                   child: Text('Muscle Groups:',
                       style: MarketplaceTheme.subheading1),
                 ),
-                ..._buildMuscleGroups(workout!.muscleGroups),
+                ..._buildMuscleGroups(workout.muscleGroups),
                 const Divider(
                   height: 40,
                   color: Colors.black26,
@@ -282,7 +282,7 @@ class workoutDisplayWidget extends StatelessWidget {
                   child: Text('Safety Precautions:',
                       style: MarketplaceTheme.subheading1),
                 ),
-                ..._buildSafetyPrecautions(workout!.safetyPrecautions),
+                ..._buildSafetyPrecautions(workout.safetyPrecautions),
                 const Divider(
                   height: 40,
                   color: Colors.black26,
@@ -293,7 +293,7 @@ class workoutDisplayWidget extends StatelessWidget {
                   ),
                   child: Text('Benefits:', style: MarketplaceTheme.subheading1),
                 ),
-                ..._buildBenefits(workout!.benefits),
+                ..._buildBenefits(workout.benefits),
               ],
             ),
           ),
@@ -312,7 +312,7 @@ class workoutDisplayWidget extends StatelessWidget {
                   child:
                       Text('Equipment:', style: MarketplaceTheme.subheading1),
                 ),
-                ..._buildEquipment(workout!.equipment),
+                ..._buildEquipment(workout.equipment),
                 const SizedBox(height: MarketplaceTheme.spacing4),
                 Padding(
                   padding: const EdgeInsets.symmetric(
@@ -320,7 +320,7 @@ class workoutDisplayWidget extends StatelessWidget {
                   child: Text('Instructions:',
                       style: MarketplaceTheme.subheading1),
                 ),
-                ..._buildInstructions(workout!.instructions),
+                ..._buildInstructions(workout.instructions),
               ],
             ),
           )
