@@ -1,10 +1,10 @@
-import 'package:ai_workout_generation/features/workouts/widgets/workout_display_widget.dart';
+import 'package:ai_workout_generation/features/workouts/widgets/workouts_display_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
 import '../../../theme.dart';
 import '../../../widgets/marketplace_button_widget.dart';
-import '../../recipes/workout_model.dart';
+import '../../workouts/workouts_model.dart';
 
 class workoutDialogScreen extends StatelessWidget {
   const workoutDialogScreen({
@@ -14,7 +14,7 @@ class workoutDialogScreen extends StatelessWidget {
     this.subheading,
   });
 
-  final workout workout;
+  final Workout workout;
   final List<Widget> actions;
   final Widget? subheading;
 

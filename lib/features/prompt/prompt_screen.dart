@@ -9,7 +9,7 @@ import '../../util/filter_chip_enums.dart';
 import '../../widgets/filter_chip_selection_input.dart';
 import '../../widgets/highlight_border_on_hover_widget.dart';
 import '../../widgets/marketplace_button_widget.dart';
-import '../workouts/widgets/workout_fullscreen_dialog.dart';
+import '../workouts/widgets/workouts_fullscreen_dialog.dart';
 import 'widgets/full_prompt_dialog_widget.dart';
 import 'widgets/image_input_widget.dart';
 
@@ -89,11 +89,11 @@ class PromptScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(elementPadding),
                       child: _FilterChipSection(
-                        label: "I also have these staple equipment: ",
+                        label: "I also have these equipments: ",
                         child: FilterChipSelectionInput<MuscleGroup>(
                           onChipSelected: (selected) {
-                            viewModel.addMuscleGroup(
-                                selected as Set<MuscleGroup>);
+                            viewModel
+                                .addMuscleGroup(selected as Set<MuscleGroup>);
                           },
                           allValues: MuscleGroup.values,
                           selectedValues:
@@ -101,33 +101,29 @@ class PromptScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-          
                   if (!constraints.isMobile)
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.all(elementPadding),
                             child: _FilterChipSection(
-                              label: "I also have these staple equipment: ",
-                              child: FilterChipSelectionInput<
-                                  MuscleGroup>(
+                              label: "I also have these equipments: ",
+                              child: FilterChipSelectionInput<MuscleGroup>(
                                 onChipSelected: (selected) {
                                   viewModel.addMuscleGroup(
                                       selected as Set<MuscleGroup>);
                                 },
                                 allValues: MuscleGroup.values,
-                                selectedValues: viewModel
-                                    .userPrompt.selectedmuscleGroup,
+                                selectedValues:
+                                    viewModel.userPrompt.selectedmuscleGroup,
                               ),
                             ),
                           ),
                         ),
-                  
                       ],
                     ),
                   Padding(

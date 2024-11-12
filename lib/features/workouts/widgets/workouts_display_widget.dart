@@ -1,11 +1,9 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:material_symbols_icons/symbols.dart';
-
 import '../../../theme.dart';
-import '../../recipes/workout_model.dart';
+import '../../workouts/workouts_model.dart';
 
 class workoutDisplayWidget extends StatelessWidget {
   const workoutDisplayWidget({
@@ -14,12 +12,12 @@ class workoutDisplayWidget extends StatelessWidget {
     this.subheading,
   });
 
-  final workout workout;
+  final Workout workout;
   final Widget? subheading;
 
-  List<Widget> _buildequipment(List<String> equipment) {
+  List<Widget> _buildEquipment(List<String> equipment) {
     final widgets = <Widget>[];
-    for (var ingredient in equipment) {
+    for (var item in equipment) {
       widgets.add(
         Row(
           mainAxisSize: MainAxisSize.min,
@@ -33,7 +31,7 @@ class workoutDisplayWidget extends StatelessWidget {
             ),
             Expanded(
               child: Text(
-                ingredient,
+                item,
                 softWrap: true,
               ),
             ),
@@ -67,6 +65,90 @@ class workoutDisplayWidget extends StatelessWidget {
     return widgets;
   }
 
+  List<Widget> _buildMuscleGroups(List<String> muscleGroups) {
+    final widgets = <Widget>[];
+    for (var group in muscleGroups) {
+      widgets.add(
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              Symbols.fitness_center,
+              size: 12,
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            Expanded(
+              child: Text(
+                group,
+                softWrap: true,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return widgets;
+  }
+
+  List<Widget> _buildSafetyPrecautions(List<String> safetyPrecautions) {
+    final widgets = <Widget>[];
+    for (var precaution in safetyPrecautions) {
+      widgets.add(
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              Symbols.warning,
+              size: 12,
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            Expanded(
+              child: Text(
+                precaution,
+                softWrap: true,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return widgets;
+  }
+
+  List<Widget> _buildBenefits(List<String> benefits) {
+    final widgets = <Widget>[];
+    for (var benefit in benefits) {
+      widgets.add(
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              Symbols.thumb_up,
+              size: 12,
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            Expanded(
+              child: Text(
+                benefit,
+                softWrap: true,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return widgets;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -88,7 +170,7 @@ class workoutDisplayWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            workout.title,
+                            workout!.title,
                             softWrap: true,
                             style: MarketplaceTheme.heading2,
                           ),
@@ -104,13 +186,15 @@ class workoutDisplayWidget extends StatelessWidget {
                     ),
                     TextButton(
                       style: ButtonStyle(
-                        backgroundColor: WidgetStateColor.resolveWith((states) {
-                          if (states.contains(WidgetState.hovered)) {
-                            return MarketplaceTheme.scrim.withAlpha(153);
-                          }
-                          return Colors.white;
-                        }),
-                        shape: WidgetStateProperty.resolveWith(
+                        backgroundColor: MaterialStateProperty.resolveWith(
+                          (states) {
+                            if (states.contains(MaterialState.hovered)) {
+                              return MarketplaceTheme.scrim.withAlpha(153);
+                            }
+                            return Colors.white;
+                          },
+                        ),
+                        shape: MaterialStateProperty.resolveWith(
                           (states) {
                             return RoundedRectangleBorder(
                               side: const BorderSide(
@@ -121,7 +205,7 @@ class workoutDisplayWidget extends StatelessWidget {
                             );
                           },
                         ),
-                        textStyle: WidgetStateTextStyle.resolveWith(
+                        textStyle: MaterialStateProperty.resolveWith(
                           (states) {
                             return MarketplaceTheme.dossierParagraph.copyWith(
                               color: Colors.black45,
@@ -137,7 +221,7 @@ class workoutDisplayWidget extends StatelessWidget {
                               content: Padding(
                                 padding: const EdgeInsets.all(
                                     MarketplaceTheme.spacing7),
-                                child: Text(workout.description),
+                                child: Text(workout!.description),
                               ),
                             );
                           },
@@ -179,67 +263,37 @@ class workoutDisplayWidget extends StatelessWidget {
                   height: 40,
                   color: Colors.black26,
                 ),
-                Table(
-                  columnWidths: const {
-                    0: FlexColumnWidth(2),
-                    1: FlexColumnWidth(3),
-                  },
-                  children: [
-                    TableRow(
-                      children: [
-                        Text(
-                          'Allergens:',
-                          style: MarketplaceTheme.paragraph.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(workout.allergens.join(', '))
-                      ],
-                    ),
-                    TableRow(children: [
-                      Text(
-                        'Servings:',
-                        style: MarketplaceTheme.paragraph.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(workout.servings)
-                    ]),
-                    TableRow(children: [
-                      Text(
-                        'Nutrition per serving:',
-                        style: MarketplaceTheme.paragraph.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const Text(''),
-                    ]),
-                    ...workout.nutritionInformation.entries.map((entry) {
-                      return TableRow(children: [
-                        Row(
-                          children: [
-                            const Icon(
-                              Symbols.stat_0_rounded,
-                              size: 12,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Expanded(
-                              child: Text(
-                                entry.key,
-                                style: MarketplaceTheme.label,
-                                softWrap: true,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Text(entry.value as String,
-                            style: MarketplaceTheme.label)
-                      ]);
-                    }),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: MarketplaceTheme.spacing7,
+                  ),
+                  child: Text('Muscle Groups:',
+                      style: MarketplaceTheme.subheading1),
                 ),
+                ..._buildMuscleGroups(workout!.muscleGroups),
+                const Divider(
+                  height: 40,
+                  color: Colors.black26,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: MarketplaceTheme.spacing7,
+                  ),
+                  child: Text('Safety Precautions:',
+                      style: MarketplaceTheme.subheading1),
+                ),
+                ..._buildSafetyPrecautions(workout!.safetyPrecautions),
+                const Divider(
+                  height: 40,
+                  color: Colors.black26,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: MarketplaceTheme.spacing7,
+                  ),
+                  child: Text('Benefits:', style: MarketplaceTheme.subheading1),
+                ),
+                ..._buildBenefits(workout!.benefits),
               ],
             ),
           ),
@@ -256,9 +310,9 @@ class workoutDisplayWidget extends StatelessWidget {
                     vertical: MarketplaceTheme.spacing7,
                   ),
                   child:
-                      Text('equipment:', style: MarketplaceTheme.subheading1),
+                      Text('Equipment:', style: MarketplaceTheme.subheading1),
                 ),
-                ..._buildequipment(workout.equipment),
+                ..._buildEquipment(workout!.equipment),
                 const SizedBox(height: MarketplaceTheme.spacing4),
                 Padding(
                   padding: const EdgeInsets.symmetric(
@@ -266,7 +320,7 @@ class workoutDisplayWidget extends StatelessWidget {
                   child: Text('Instructions:',
                       style: MarketplaceTheme.subheading1),
                 ),
-                ..._buildInstructions(workout.instructions),
+                ..._buildInstructions(workout!.instructions),
               ],
             ),
           )

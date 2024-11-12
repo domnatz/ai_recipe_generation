@@ -1,5 +1,5 @@
 import 'package:ai_workout_generation/features/workouts/workouts_view_model.dart';
-import 'package:ai_workout_generation/features/workouts/widgets/workout_fullscreen_dialog.dart';
+import 'package:ai_workout_generation/features/workouts/widgets/workouts_fullscreen_dialog.dart';
 import 'package:ai_workout_generation/theme.dart';
 import 'package:ai_workout_generation/util/extensions.dart';
 import 'package:ai_workout_generation/widgets/highlight_border_on_hover_widget.dart';
@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../../widgets/marketplace_button_widget.dart';
 import '../../widgets/star_rating.dart';
-import '../recipes/workout_model.dart';
+import '../workouts/workouts_model.dart';
 
 class SavedworkoutsScreen extends StatefulWidget {
   const SavedworkoutsScreen({super.key, required this.canScroll});
@@ -135,7 +135,7 @@ class _ListTile extends StatefulWidget {
     required this.constraints,
   });
 
-  final workout workout;
+  final Workout workout;
   final int idx;
   final BoxConstraints constraints;
 
