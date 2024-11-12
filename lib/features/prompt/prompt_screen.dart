@@ -66,7 +66,7 @@ class PromptScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(elementPadding + 10),
                     child: Text(
-                      'Generate Workouts:',
+                      'Gymskie:',
                       style: MarketplaceTheme.dossierParagraph.copyWith(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
