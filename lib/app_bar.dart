@@ -24,7 +24,7 @@ class AnimatedAppBar extends StatelessWidget {
 
   String get headerText {
     return switch (tabController.index) {
-      0 => 'Generate Workouts',
+      0 => 'Gymskie',
       1 => 'Saved Workouts',
       2 => 'Settings',
       _ => 'Uh oh!',
