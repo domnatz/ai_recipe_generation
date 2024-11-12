@@ -18,7 +18,7 @@ class PromptData {
         textInput = '';
 
   String get equipment {
-    return selectedmuscleGroup.map((ingredient) => ingredient.name).join(", ");
+    return selectedmuscleGroup.map((workout) => workout.name).join(", ");
   }
 
   List<XFile> images;
