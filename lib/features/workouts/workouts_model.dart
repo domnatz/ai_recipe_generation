@@ -31,6 +31,7 @@ class Workout {
     assert(content.text != null);
 
     final validJson = cleanJson(content.text!);
+    print('Valid JSON: $validJson');
     final json = jsonDecode(validJson);
 
     if (json
@@ -50,11 +51,13 @@ class Workout {
           equipment: equipment.map((i) => i.toString()).toList(),
           instructions: instructions.map((i) => i.toString()).toList(),
           muscleGroups: muscleGroups.map((i) => i.toString()).toList(),
-          safetyPrecautions: safetyPrecautions.map((i) => i.toString()).toList(),
+          safetyPrecautions:
+              safetyPrecautions.map((i) => i.toString()).toList(),
           benefits: benefits.map((i) => i.toString()).toList(),
           description: description);
     }
 
+    print('Malformed JSON: $json');
     throw JsonUnsupportedObjectError(json);
   }
 

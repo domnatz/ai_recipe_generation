@@ -72,6 +72,7 @@ class PromptViewModel extends ChangeNotifier {
   Future<void> submitPrompt() async {
     loadingNewworkout = true;
     notifyListeners();
+    print('Submitting prompt...');
     // Create an ephemeral PromptData, preserving the user prompt data without
     // adding the additional context to it.
     var model = userPrompt.images.isEmpty ? textModel : multiModalModel;
@@ -79,18 +80,24 @@ class PromptViewModel extends ChangeNotifier {
 
     try {
       final content = await GeminiService.generateContent(model, prompt);
+      print('Content received from Gemini: ${content.text}');
 
       // handle no image or image of not-food
       if (content.text != null && content.text!.contains(badImageFailure)) {
         geminiFailureResponse = badImageFailure;
+        print('Bad image failure: $badImageFailure');
       } else {
-        workout = Workout.fromGeneratedContent(content);
+        try {
+          workout = Workout.fromGeneratedContent(content);
+          print('Workout generated: ${workout!.title}');
+        } catch (e) {
+          print('Error parsing workout content: $e');
+          geminiFailureResponse = 'Failed to parse workout content.';
+        }
       }
     } catch (error) {
       geminiFailureResponse = 'Failed to reach Gemini. \n\n$error';
-      if (kDebugMode) {
-        print(error);
-      }
+      print('Error reaching Gemini: $error');
       loadingNewworkout = false;
     }
 
@@ -122,7 +129,7 @@ Do not repeat any equipment.
 
 After providing the workouts, add descriptions that creatively explain why the workouts are good based on only the equipment used in the workout.
 List out any safety precautions when using the gym equipment.
-Provide a summary of the workout and the benefits of the workout.
+Provide a summary of the workout and the benefits of the workout. Make your responses as brief as possible.
 
 ${promptTextController.text.isNotEmpty ? promptTextController.text : ''}
 ''';
