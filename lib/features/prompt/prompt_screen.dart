@@ -89,7 +89,7 @@ class PromptScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(elementPadding),
                       child: _FilterChipSection(
-                        label: "I also have these equipments: ",
+                        label: "These are my target muscle groups: ",
                         child: FilterChipSelectionInput<MuscleGroup>(
                           onChipSelected: (selected) {
                             viewModel
@@ -111,7 +111,7 @@ class PromptScreen extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(elementPadding),
                             child: _FilterChipSection(
-                              label: "I also have these equipments: ",
+                              label: "These are my target muscle groups: ",
                               child: FilterChipSelectionInput<MuscleGroup>(
                                 onChipSelected: (selected) {
                                   viewModel.addMuscleGroup(
